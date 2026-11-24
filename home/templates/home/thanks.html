@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Thank You</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #0F172A;
+            color: #F8FAFC;
+            font-family: 'Inter', sans-serif;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 30px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 680px;
+            text-align: center;
+        }
+
+        /* Top icon */
+        .icon {
+            width: 76px;
+            height: 76px;
+
+            margin: 0 auto 22px;
+
+            border-radius: 22px;
+
+            background: #1E293B;
+            border: 1px solid #334155;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 32px;
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+
+            padding: 8px 14px;
+
+            border: 1px solid #334155;
+            border-radius: 999px;
+
+            color: #94A3B8;
+
+            font-size: 11px;
+            font-weight: 700;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 20px;
+        }
+
+        /* Title */
+        h1 {
+            font-size: clamp(42px, 8vw, 68px);
+
+            line-height: 1;
+
+            letter-spacing: -3px;
+
+            margin-bottom: 18px;
+        }
+
+        /* Description */
+        .description {
+            max-width: 520px;
+
+            margin: 0 auto 35px;
+
+            color: #94A3B8;
+
+            font-size: 16px;
+
+            line-height: 1.8;
+        }
+
+        /* Main card */
+        .card {
+            background: #1E293B;
+
+            border: 1px solid #334155;
+
+            border-radius: 24px;
+
+            padding: 30px;
+
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Buttons */
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .button {
+            width: 100%;
+
+            min-height: 54px;
+
+            border-radius: 13px;
+
+            padding: 15px 20px;
+
+            text-decoration: none;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 10px;
+
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        /* Results */
+        .results {
+            background: #F8FAFC;
+            color: #0F172A;
+
+            border: 1px solid #F8FAFC;
+        }
+
+        .results:hover {
+            background: #E2E8F0;
+
+            transform: translateY(-2px);
+        }
+
+        /* About */
+        .about {
+            background: #0F172A;
+
+            color: #F8FAFC;
+
+            border: 1px solid #475569;
+        }
+
+        .about:hover {
+            background: #111C31;
+
+            border-color: #64748B;
+
+            transform: translateY(-2px);
+        }
+
+        /* Locked Leave */
+        .leave-disabled {
+            background: #172033;
+
+            color: #475569;
+
+            border: 1px solid #263449;
+
+            cursor: not-allowed;
+        }
+
+        .lock {
+            font-size: 13px;
+        }
+
+        /* Hint */
+        .hint {
+            margin-top: 18px;
+
+            color: #64748B;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 25px;
+
+            color: #64748B;
+
+            font-size: 12px;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+
+            body {
+                padding: 20px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+
+            h1 {
+                letter-spacing: -2px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <!-- Icon -->
+    <div class="icon">
+        ✓
+    </div>
+
+
+    <!-- Badge -->
+    <div class="badge">
+        COMPLETED
+    </div>
+
+
+    <!-- Title -->
+    <h1>
+        Thank you.
+    </h1>
+
+
+    <!-- Description -->
+    <p class="description">
+        Your answers have been recorded successfully.
+        You can check the results or learn more about this project.
+    </p>
+
+
+    <!-- Buttons Card -->
+    <div class="card">
+
+        <div class="buttons">
+
+            <!-- Results -->
+            <a
+                href="{% url 'home:results' last_question.id %}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="button results"
+            >
+                View Results
+                <span>↗</span>
+            </a>
+
+
+            <!-- About -->
+            <a
+                href="{% url 'home:about_me' %}"
+                class="button about"
+            >
+                About
+                <span>→</span>
+            </a>
+
+
+            <!-- Locked Leave -->
+            <button
+                type="button"
+                class="button leave-disabled"
+                disabled
+            >
+                <span class="lock">🔒</span>
+                Leave
+            </button>
+
+        </div>
+
+
+        <p class="hint">
+            Visit the About page first to unlock the final step.
+        </p>
+
+    </div>
+
+
+    <div class="footer">
+        Built with Django
+    </div>
+
+</div>
+
+</body>
+
+</html>

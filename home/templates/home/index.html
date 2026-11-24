@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polls - Vote on Your Favorite Topics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0F172A;
+            color: #F8FAFC;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #22D3EE 0%, #38BDF8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: #94A3B8;
+            font-size: 1.1rem;
+        }
+
+        .polls-list {
+            list-style: none;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .poll-card {
+            background: #1E293B;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .poll-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #22D3EE 0%, #38BDF8 100%);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .poll-card:hover {
+            transform: translateY(-2px);
+            border-color: #22D3EE;
+            box-shadow: 0 8px 24px rgba(34, 211, 238, 0.15);
+        }
+
+        .poll-card:hover::before {
+            opacity: 1;
+        }
+
+        .poll-card a {
+            color: #F8FAFC;
+            text-decoration: none;
+            font-size: 1.125rem;
+            font-weight: 500;
+            display: block;
+        }
+
+        .poll-card a:hover {
+            color: #22D3EE;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: #1E293B;
+            border: 1px dashed #334155;
+            border-radius: 12px;
+        }
+
+        .empty-state p {
+            color: #94A3B8;
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-state small {
+            color: #64748B;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 640px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .poll-card {
+                padding: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Active Polls</h1>
+            <p class="subtitle">Choose a poll below to cast your vote</p>
+        </header>
+
+        {% if latest_question_list %}
+            <ul class="polls-list">
+            {% for question in latest_question_list %}
+                <li class="poll-card">
+                    <a href="/polls/{{ question.id }}/">{{ question.question_text }}</a>
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <div class="empty-state">
+                <p>No polls are available.</p>
+                <small>Check back later for new polls!</small>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
